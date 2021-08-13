@@ -54,18 +54,16 @@
 
             <hr>
             <div class="card shadow-0 border mt-5" style="background-color: #f0f2f5;">
-                <div class="card-body p-4">
-                    <h5 class="mb-4"> Comments (<span th:text="${comments}">20</span>)</h5>
-                    <div class="form-outline mb-4">
-                        <form class="d-flex" method="post" th:action="@{/comment(action=addComment)}">
-                            <input type="hidden" th:value="*{id}" name="movie_id"/>
-                            <div class="ps-0"><input type="text" class="form-control" name="name" placeholder="Name"/></div>
-                            <div class="ps-2"><input type="text" class="form-control" name="email" placeholder="Email"/></div>
-                            <div class="ps-2 flex-grow-1 "><input type="text" class="form-control" name="comment" placeholder="Comment"/></div>
-                            <div class="ps-2">
-                                <button class="btn btn-outline-success" type="submit">Send</button>
-                            </div>
-                        </form>
+                <div class="form-outline mb-4">
+                    <form class="d-flex user d-none" method="post" th:action="@{/comment(action=addComment)}">
+                        <input type="hidden" th:value="*{id}" name="movie_id"/>
+                        <div class="flex-grow-1"><input type="text" class="form-control" name="comment" placeholder="Comment"/></div>
+                        <div class="ps-2">
+                            <button class="btn btn-outline-success" type="submit">Send</button>
+                        </div>
+                    </form>
+                    <div class="text-center guest">You must be <a href="#" data-bs-toggle="modal" data-bs-target="#modal-login">logged in</a> to post a comment.</div>
+
                     </div>
                     <div class="card" th:each="comment:${comments}">
                         <div class="card-body">

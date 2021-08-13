@@ -9,12 +9,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Locale;
 
-public class HomeController implements IController {
+public class HomeController extends MyController {
 
     public void process(final HttpServletRequest request, final HttpServletResponse response, final ServletContext servletContext, final ITemplateEngine templateEngine) throws Exception {
-        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
+        super.process(request, response, servletContext, templateEngine);
         String by = null;
         String value = null;
         String text = null;
@@ -32,6 +33,7 @@ public class HomeController implements IController {
             url = url + "&text=" + text;
         }
         ctx.setVariable("url", url);
+
         boolean showCarousel = true;
         boolean showBreadcrumb = true;
         if (by != null || text != null) {  //Filter
@@ -46,7 +48,6 @@ public class HomeController implements IController {
         ctx.setVariable("showCarousel", showCarousel);
         ctx.setVariable("showBreadcrumb", showBreadcrumb);
 
-
         long totalPages = new MovieService().getTotalPages(by, value, text);
         ctx.setVariable("totalPages", totalPages);
         int page = 1;
@@ -59,6 +60,4 @@ public class HomeController implements IController {
         ctx.setVariable("list", list);
         templateEngine.process("index", ctx, response.getWriter());
     }
-
-
 }
