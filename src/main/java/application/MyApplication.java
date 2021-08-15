@@ -24,6 +24,7 @@ public class MyApplication {
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setPrefix("/templates/");
         templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setCacheTTLMs(Long.valueOf(3600000L));
         templateResolver.setCacheable(true);
         this.templateEngine = new TemplateEngine();
